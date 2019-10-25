@@ -34,13 +34,13 @@ export class Dashboard {
        let moveResponseEvent: MoveResponseEvent = JSON.parse(msg.getBinaryAttachment());
        this.moveResultMap[moveResponseEvent.player]=moveResponseEvent;
        if(moveResponseEvent.moveResult=='ship'){
-           this.action = 'hit';
+           this.action = 'hit!';
            this.scoreMap[moveResponseEvent.player]-=1;
            if(this.scoreMap[moveResponseEvent.player]==0){
                 this.router.navigateToRoute('game-over',{msg:`${moveResponseEvent.player=='Player1'?'Player2':'Player1'} WINS!!!!`});
            }
        }else{
-           this.action='miss';
+           this.action='miss!';
        }
        this.turnMessage=`${moveResponseEvent.player}'s Turn`;
     });

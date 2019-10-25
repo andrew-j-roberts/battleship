@@ -1,3 +1,4 @@
+import { EventAggregator } from 'aurelia-event-aggregator';
 import { bindable, inject } from 'aurelia-framework';
 import { GameParams } from 'common/game-params';
 import { SolaceClient } from './common/solace-client';
@@ -14,7 +15,7 @@ interface BoardProperties {
 }
 
 
-@inject(obelisk,SolaceClient, GameParams, TopicHelper)
+@inject(obelisk,SolaceClient, GameParams, TopicHelper, EventAggregator)
 export class DashboardBoard {
   @bindable player: PlayerName;
   battleshipCanvas;
@@ -22,13 +23,14 @@ export class DashboardBoard {
   boardProperties : BoardProperties;
   @bindable moveUpdate: MoveResponseEvent;  
 
-  constructor(private obelisk:obelisk, private solaceClient: SolaceClient, private gameParams:GameParams, private topicHelper: TopicHelper){
+  constructor(private obelisk:obelisk, private solaceClient: SolaceClient, private gameParams:GameParams, private topicHelper: TopicHelper, private ea: EventAggregator){
     //Setting the board to have 5 squares per row with each square measuring 60 pixels
     //Note: Be mindful of modifying these properties as you may need to modify the canvas width
     this.boardProperties = {
       'units':this.gameParams.gameboardDimensions,
       'size':60
     };
+
   }
 
   /**

@@ -90,6 +90,14 @@ export class MoveResponseEvent {
   */ 
 
   export class BoardSetEvent {
-      player: Player;
+      playerName: PlayerName;
       shipsSet: number;
+  }
+
+  /**
+   * Internal event for moves
+   */
+  export class MoveResult {
+    score: number;
+    action: PrivateBoardCellState;
   }
