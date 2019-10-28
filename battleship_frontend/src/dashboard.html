@@ -6,7 +6,7 @@
       <div class="game-board-turn">${turnMessage}</div>
       <dashboard-board player="Player1" move-update.bind="moveResultMap['Player1']"></dashboard-board>
       <dashboard-board player="Player2" move-update.bind="moveResultMap['Player2']"></dashboard-board>
-      <div class="game-board-action ${action=='hit'?'hit-blinking':''}">${action}</div>
+      <div class="game-board-action ${action=='hit'?'hit-blinking':''}">${action+'!'}</div>
     </div>
     <div class="match-board__score-card">
       <div class="match-board__score-card__title">REMAINING SHIPS</div>

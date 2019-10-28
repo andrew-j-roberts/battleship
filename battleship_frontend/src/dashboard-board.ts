@@ -2,7 +2,7 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 import { bindable, inject } from 'aurelia-framework';
 import { GameParams } from 'common/game-params';
 import { SolaceClient } from './common/solace-client';
-import { KnownBoardCellState,  PlayerName, MoveResponseEvent, TopicHelper } from './common/events';
+import { KnownBoardCellState, PlayerName, MoveResponseEvent, TopicHelper, InternalMoveResult } from './common/events';
 import obelisk  from 'obelisk.js';
 
 /*
@@ -17,7 +17,8 @@ interface BoardProperties {
 
 @inject(obelisk,SolaceClient, GameParams, TopicHelper, EventAggregator)
 export class DashboardBoard {
-  @bindable player: PlayerName;
+  @bindable 
+  player: PlayerName;
   battleshipCanvas;
   pixelView;
   boardProperties : BoardProperties;
@@ -119,6 +120,14 @@ export class DashboardBoard {
     }else{
       cellState[this.gameParams.gameboardDimensions-1-missileY][missileX]=moveResult;
       this.renderBoard(cellState);
+      let imr: InternalMoveResult = new InternalMoveResult();
+      imr.player=this.player;
+      if(moveResult=='hit'){
+        imr.action='ship';
+      }else{
+        imr.action='empty'
+      }
+      this.ea.publish(imr);
     }
   }
 

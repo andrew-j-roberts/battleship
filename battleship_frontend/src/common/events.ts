@@ -97,7 +97,7 @@ export class MoveResponseEvent {
   /**
    * Internal event for moves
    */
-  export class MoveResult {
+  export class InternalMoveResult {
     score: number;
     action: PrivateBoardCellState;
   }
