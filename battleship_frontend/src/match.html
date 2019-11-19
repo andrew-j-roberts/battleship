@@ -2,17 +2,18 @@
   <require from="./scoreboard"></require>
   <div show.bind="pageState === 'Player1' || pageState ==='Player2'" class="flex-column align__center w-100 h-100">
     <div class="match-board__board justify_center">
-    <label class="match-board__yourturn-label">
-      <span>${turnMessage}</span>
-        <div class="board__container">
+      <label class="match-board__yourturn-label">
+        <span>${turnMessage}</span>
+      </label>
+      <div class="board__container">
         <div class="board">
-            <div repeat.for="row of gameParams.gameboardDimensions" class="board__row">
-              <div repeat.for="column of gameParams.gameboardDimensions" class="board__square" click.delegate="boardSelectEvent(column, $parent.row)">
-                ${enemyBoard[column][$parent.row] === "empty" ? "?" : (enemyBoard[column][$parent.row] === "miss") ? "🌊" : "🎯"}
-              </div>
+          <div repeat.for="row of gameParams.gameboardDimensions" class="board__row">
+            <div repeat.for="column of gameParams.gameboardDimensions" class="board__square" click.delegate="boardSelectEvent(column, $parent.row)">
+              ${enemyBoard[column][$parent.row] === "empty" ? "?" : (enemyBoard[column][$parent.row] === "miss") ? "🌊" : "🎯"}
             </div>
-            </div>
+          </div>
         </div>
       </div>
+    </div>
   </div>
 </template>
